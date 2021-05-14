@@ -17,9 +17,10 @@ module.exports = {
 			{
 				test: /\.[tj]sx?$/,
 				use: ['ts-loader'],
+				exclude: /node_modules/,
 			},
 			{
-				test: /\.css$/,
+				test: /\.(s*)css$/,
 				use: [
 					'style-loader',
 					{
@@ -28,10 +29,11 @@ module.exports = {
 							modules: {
 								mode: 'local',
 								localIdentName: '[name]__[local]__[hash:base64:5]',
-								auto: /\.modules\..w+$/i,
+								auto: /\.modules\.\w+$/i,
 							},
 						}
-					}
+					},
+					'sass-loader',
 				],
 			}
 		]
