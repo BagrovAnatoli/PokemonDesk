@@ -32,7 +32,7 @@ const Parallax = () => {
             <div
                 className={s.smallPokeBall}
                 style={{
-                    transform: `translate(${screenX * 0.05}px, ${screenY * 0.05}px)`
+                    transform: `translate(${screenX * 0.01}px, ${screenY * -0.1}px) rotate(${(screenX + screenY*1.5) * 0.1 - 90}deg)`
                 }}
             >
                 <img src={SmallPokeBallPng} alt="Small PokeBall" />
@@ -40,7 +40,7 @@ const Parallax = () => {
             <div
                 className={s.cloud}
                 style={{
-                    transform: `translate(${screenX * 0.04}px, ${screenY * 0.04}px)`
+                    transform: `translate(${screenX * -0.02}px)`
                 }}
             >
                 <img src={CloudPng} alt="Cloud PokeBall" />
@@ -48,7 +48,7 @@ const Parallax = () => {
             <div
                 className={s.cloudBig}
                 style={{
-                    transform: `translate(${screenX * 0.03}px, ${screenY * 0.03}px)`
+                    transform: `translate(${screenX * 0.03}px)`
                 }}
             >
                 <img src={CloudBigPng} alt="Cloud Big PokeBall" />
@@ -56,7 +56,7 @@ const Parallax = () => {
             <div
                 className={s.pokeBall}
                 style={{
-                    transform: `translate(${screenX * 0.02}px, ${screenY * 0.02}px)`
+                    transform: `translate(${screenX * 0.01}px, ${screenY * 0.08}px)`
                 }}
             >
                 <img src={PokeBallPng} alt="Big PokeBall" />
@@ -64,7 +64,7 @@ const Parallax = () => {
             <div
                 className={s.pikachu}
                 style={{
-                    transform: `translate(${screenX * 0.01}px, ${screenY * 0.01}px)`
+                    transform: `translate(${screenX * 0.05}px, ${screenY * 0.1}px) rotate(${(screenX + screenY) * 0.01 - 20}deg)`
                 }}
             >
                 <img src={PikachuPng} alt="Cloud PokeBall" />
