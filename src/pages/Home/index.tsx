@@ -17,7 +17,12 @@ const HomePage = () => {
 						<b>Find</b> all your favorite <b>Pokemon</b>
 					</h1>
 					<p>You canknow the type of Pokemon, its strengths, disadvantages and abilities</p>
-					<Button onClick={(event)=>console.log('Click Button!')}>
+					<Button
+						onClick={(event)=>console.log('Click Button!')}
+						width='wide'
+						color='yellow'
+						size='small'
+					>
 						See pokemons
 					</Button>
 				</div>
