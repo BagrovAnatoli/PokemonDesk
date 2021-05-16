@@ -66,6 +66,11 @@ module.exports = {
         ],
         exclude: /node_modules/,
       },
+      {
+        test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+        use: ['url-loader'],
+        exclude: /node_modules/,
+      }
     ],
   },
   plugins: [

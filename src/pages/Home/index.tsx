@@ -2,6 +2,7 @@ import React from 'react';
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
+import Parallax from "../../components/Parallax";
 
 import s from './Home.module.scss';
 
@@ -20,7 +21,9 @@ const HomePage = () => {
 						See pokemons
 					</Button>
 				</div>
-				<div className={s.contentParallax}>We&apos;ll see Parallax here soon...</div>
+				<div className={s.contentParallax}>
+					<Parallax />
+				</div>
 			</Layout>
 		</div>
 	);
