@@ -1,13 +1,12 @@
-import React from 'react';
-import HomePage from "./pages/Home";
-
-import s from './App.module.scss';
-
+import {useRoutes} from 'hookrouter';
+import routes from './routes';
 
 const App = () => {
   console.log('####: Some log');
 
-  return <HomePage />;
+  const match = useRoutes(routes);
+
+  return match;
 };
 
 export default App;
