@@ -1,9 +1,13 @@
 import React from 'react';
+
 import Header from "../../components/Header";
 import Layout from "../../components/Layout";
 import Button from "../../components/Button";
 import Parallax from "../../components/Parallax";
 import Heading from "../../components/Heading";
+import {LinkEnum} from '../../routes';
+import {navigate} from 'hookrouter';
+
 
 import s from './Home.module.scss';
 
@@ -19,7 +23,7 @@ const HomePage = () => {
 					</h1>
 					<Heading hType='paragraph'><p>You can know the type of Pokemon, its strengths, disadvantages and abilities</p></Heading>
 					<Button
-						onClick={(event)=>console.log('Click Button!')}
+						onClick={() => navigate(LinkEnum.POKEDEX)}
 						width='wide'
 						color='yellow'
 						size='small'
