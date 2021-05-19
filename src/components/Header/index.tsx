@@ -1,5 +1,5 @@
 import React from 'react';
-
+import A from 'hookrouter';
 import s from './Header.module.scss';
 
 import {ReactComponent as PokemonLogoSvg} from './assets/Logo.svg';
@@ -14,12 +14,12 @@ const MENU: IMenu[] = [
 	{
 		id: 1,
 		value: 'Home',
-		link: '#',
+		link: '/',
 	},
 	{
 		id: 2,
 		value: 'Pokédex',
-		link: '#',
+		link: '/pokedex',
 	},
 	{
 		id: 3,

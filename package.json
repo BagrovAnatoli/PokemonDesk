@@ -13,7 +13,7 @@
   "dependencies": {
     "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
-    "hookrouter": "^1.2.5",
+    "hookrouter": "1.2.3",
     "node-sass": "^6.0.0",
     "npx": "^10.2.2",
     "react": "^17.0.2",
