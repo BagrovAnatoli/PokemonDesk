@@ -14,7 +14,6 @@ const Parallax = () => {
 
     useEffect(() => {
         const handleMouseMove = (event: MouseEvent) => {
-            //console.log('####: event', event.screenX, event.screenY);
             setScreenX(event.screenX);
             setScreenY(event.screenY);
         };
@@ -22,7 +21,6 @@ const Parallax = () => {
         window.addEventListener('mousemove', handleMouseMove);
 
         return () => {
-            console.log('####: remove');
             window.removeEventListener('mousemove', handleMouseMove);
         };
     }, [screenX, screenY]);

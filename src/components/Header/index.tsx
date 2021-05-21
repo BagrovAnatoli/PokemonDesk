@@ -15,6 +15,7 @@ interface IMenu {
 
 
 const Header = () => {
+	console.log('####: Header');
 	const path = usePath();
 	return (
 		<div className={s.root}>
