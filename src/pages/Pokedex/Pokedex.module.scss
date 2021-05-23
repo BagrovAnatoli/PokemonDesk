@@ -1,0 +1,23 @@
+@import "../../variables";
+
+.root {
+	min-height: 100vh;
+	background: linear-gradient(180deg, $third 0%, $primary 100%);
+}
+
+#wrapper {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+#content {
+	text-align: center;
+}
+
+.card {
+	width: 200px;
+	height: 200px;
+	background-color: #979576;
+	margin: 10px;
+	display: inline-block;
+}
