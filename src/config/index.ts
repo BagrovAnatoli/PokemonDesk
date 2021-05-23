@@ -14,5 +14,5 @@ export const config = {
 		}
 	}
 }
-
+//export type ConfigEndpointKeyType = keyof typeof config.client.endpoint;
 export default config;

@@ -52,6 +52,25 @@ interface IData {
 		pokemons: IPokemon[];
 	}
 interface IPokemon {
+	"name_clean": string;
+    "abilities": string[];
+    "stats": {
+      "hp": number;
+      "attack": number;
+      "defense": number;
+      "special-attack": number;
+      "special-defense": number;
+      "speed": number;
+    },
+    "types": string[];
+    "img": string;
+    "name": string;
+    "base_experience": number;
+    "height": number;
+    "id": number;
+    "is_default": boolean;
+    "order": number;
+    "weight": number;
 }
 
 const PokedexPage = () => {
@@ -76,27 +95,28 @@ const PokedexPage = () => {
 				<Heading hType='h3'>
 					{data?.total} <b>Pokemons</b> for you to choise favorite
 				</Heading>
+				{/*
 				<div>
 					{data?.pokemons.map((item: any) => <div>{item.name}</div>)}
 				</div>
-			</Layout>
+				*/}
 			
-			{/*
-			<div className={s.root}>
-				<div id={s.wrapper}>
-					<div id={s.content}>
-						{
-							pokemons.map((pokemon) => {
-								return <PokemonCard
-									key={pokemon.name}
-									pokemon={pokemon}
-								/>
-							})
-						}
-					</div>	
+			
+				<div className={s.root}>
+					<div id={s.wrapper}>
+						<div id={s.content}>
+							{
+								data?.pokemons.map((pokemon) => {
+									return <PokemonCard
+										key={pokemon.name}
+										pokemon={pokemon}
+									/>
+								})
+							}
+						</div>	
+					</div>
 				</div>
-			</div>
-			*/}
+			</Layout>
 		</>
 	);
 };
