@@ -6,38 +6,58 @@ import Layout from '../../components/Layout';
 
 import s from './Pokedex.module.scss';
 
+const usePokemons = () => {
+	const [data, setData] = useState<IData>();
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
+
+	useEffect(() => {
+		const getPokemons = async() => {
+			setIsLoading(true);
+			try{
+				const response = await fetch('http://zar.hosthot.ru/api/v1/pokemons');
+				const result = await response.json();
+
+				setData(result);
+				setIsError(false);
+			} catch (e) {
+				setIsError(true);
+			} finally {
+				setIsLoading(false);
+			}
+		}
+		getPokemons();
+	}, []);
+
+	return {
+		data,
+		isLoading,
+		isError
+	}
+}
+
 
 // interface EmptyPageProps {
 // 	title?: string;
 // };
 //console.log('pokemons: ', pokemons);
+interface IData {
+		total: number;
+		count: number;
+		offset: number;
+		limit: number;
+		pokemons: IPokemon[];
+	}
 interface IPokemon {
-
 }
 
 const PokedexPage = () => {
-	const [totalPokemons, setTotalPokemons] = useState(0);
-	const [pokemons, setPokemons] = useState<IPokemon[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
+	const {
+		data,
+		isLoading,
+		isError
+	} = usePokemons();
 
-	useEffect(() => {
-		setIsLoading(true);
-		fetch('http://zar.hosthot.ru/api/v1/pokemons')
-		.then(res => res.json())
-		.then(data => {
-			console.log('####: res', data);
-			setTotalPokemons(data.total);
-			setPokemons(data.pokemons);
-			setIsError(false);
-		})
-		.catch(() => {
-			setIsError(true);
-		})
-		.finally(() => {
-			setIsLoading(false);
-		});
-	}, []);
 
 	if (isLoading) {
 		return <div>Loading...</div>
@@ -51,10 +71,10 @@ const PokedexPage = () => {
 		<>
 			<Layout className={s.root}>
 				<Heading hType='h3'>
-					{totalPokemons} <b>Pokemons</b> for you to choise favorite
+					{data?.total} <b>Pokemons</b> for you to choise favorite
 				</Heading>
 				<div>
-					{pokemons.map((item: any) => <div>{item.name}</div>)}
+					{data?.pokemons.map((item: any) => <div>{item.name}</div>)}
 				</div>
 			</Layout>
 			
