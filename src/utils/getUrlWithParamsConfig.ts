@@ -1,12 +1,11 @@
-// import config from '../config';
+import config from '../config';
 
-// function getUrlWithParamsConfig(endpointConfig: string): string {
-// 	let url = {
-// 		protocol: config.client.server.protocol,
-// 		host: config.client.server.host,
-// 		pathname: config.client.endpoint[endpointConfig].uri.pathname
-// 	};
-// 	return url;
-// }
+function getUrlWithParamsConfig(endpointConfig: string): object {
+	let url = {
+		...config.client.server,
+		...config.client.endpoint[endpointConfig as keyof typeof config.client.endpoint].uri
+	};
+	return url;
+}
 
-// export default getUrlWithParamsConfig;
+export default getUrlWithParamsConfig;
