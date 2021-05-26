@@ -1,40 +1,14 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useMemo} from 'react';
 import PokemonCard from '../../components/PokemonCard';
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 //import { pokemons } from './assets/pokemons';
+import useData from '../../hook/getData';
 import req from "../../utils/request";
 
 import s from './Pokedex.module.scss';
 
-const usePokemons = () => {
-	const [data, setData] = useState<IData>();
-	const [isLoading, setIsLoading] = useState(true);
-	const [isError, setIsError] = useState(false);
 
-	useEffect(() => {
-		const getPokemons = async() => {
-			setIsLoading(true);
-			try{
-				const result = await req('getPokemons');
-
-				setData(result);
-				setIsError(false);
-			} catch (e) {
-				setIsError(true);
-			} finally {
-				setIsLoading(false);
-			}
-		}
-		getPokemons();
-	}, []);
-
-	return {
-		data,
-		isLoading,
-		isError
-	}
-}
 
 
 // interface EmptyPageProps {
@@ -71,16 +45,31 @@ interface IPokemon {
 }
 
 const PokedexPage = () => {
+	const [searchValue, setSearchValue] = useState('');
+	const [query, setQuery] = useState({});
+
+	// const query = useMemo(() => ({
+	// 	name: searchValue
+	// }),[searchValue]);
 	const {
 		data,
 		isLoading,
 		isError
-	} = usePokemons();
+	} = useData('getPokemons', query, [searchValue]);
 
-
-	if (isLoading) {
-		return <div>Loading...</div>
+	const handleSearhChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		console.log('####: e', e.target.value);
+		setSearchValue(e.target.value);
+		setQuery((s) => ({
+			...s,
+			name: e.target.value
+		}));
 	}
+
+
+	// if (isLoading) {
+	// 	return <div>Loading...</div>
+	// }
 
 	if (isError) {
 		return <div>Something wrong!</div>
@@ -90,20 +79,22 @@ const PokedexPage = () => {
 		<>
 			<Layout className={s.root}>
 				<Heading hType='h3'>
-					{data?.total} <b>Pokemons</b> for you to choise favorite
+					{!isLoading && data?.total} <b>Pokemons</b> for you to choise favorite
 				</Heading>
 				{/*
 				<div>
 					{data?.pokemons.map((item: any) => <div>{item.name}</div>)}
 				</div>
 				*/}
-			
+				<div>
+					<input type="text" value={searchValue} onChange={handleSearhChange}/>
+				</div>
 			
 				<div className={s.root}>
 					<div id={s.wrapper}>
 						<div id={s.content}>
 							{
-								data?.pokemons.map((pokemon) => {
+								!isLoading && data?.pokemons.map((pokemon) => {
 									return <PokemonCard
 										key={pokemon.name}
 										pokemon={pokemon}
