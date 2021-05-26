@@ -1,10 +1,12 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState} from 'react';
 import PokemonCard from '../../components/PokemonCard';
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 //import { pokemons } from './assets/pokemons';
 import useData from '../../hook/getData';
 import req from "../../utils/request";
+
+import {IPokemons, PokemonsData} from '../../interface/pokemons'
 
 import s from './Pokedex.module.scss';
 
@@ -15,38 +17,44 @@ import s from './Pokedex.module.scss';
 // 	title?: string;
 // };
 //console.log('pokemons: ', pokemons);
-interface IData {
-		total: number;
-		count: number;
-		offset: number;
-		limit: number;
-		pokemons: IPokemon[];
-	}
-interface IPokemon {
-	"name_clean": string;
-    "abilities": string[];
-    "stats": {
-      "hp": number;
-      "attack": number;
-      "defense": number;
-      "special-attack": number;
-      "special-defense": number;
-      "speed": number;
-    },
-    "types": string[];
-    "img": string;
-    "name": string;
-    "base_experience": number;
-    "height": number;
-    "id": number;
-    "is_default": boolean;
-    "order": number;
-    "weight": number;
+
+// interface IData {
+// 		total: number;
+// 		count: number;
+// 		offset: number;
+// 		limit: number;
+// 		pokemons: IPokemon[];
+// 	}
+
+// interface IPokemon {
+// 	"name_clean": string;
+//     "abilities": string[];
+//     "stats": {
+//       "hp": number;
+//       "attack": number;
+//       "defense": number;
+//       "special-attack": number;
+//       "special-defense": number;
+//       "speed": number;
+//     },
+//     "types": string[];
+//     "img": string;
+//     "name": string;
+//     "base_experience": number;
+//     "height": number;
+//     "id": number;
+//     "is_default": boolean;
+//     "order": number;
+//     "weight": number;
+// }
+
+interface IQuery {
+	name?: string;
 }
 
 const PokedexPage = () => {
 	const [searchValue, setSearchValue] = useState('');
-	const [query, setQuery] = useState({});
+	const [query, setQuery] = useState<IQuery>({});
 
 	// const query = useMemo(() => ({
 	// 	name: searchValue
@@ -55,13 +63,13 @@ const PokedexPage = () => {
 		data,
 		isLoading,
 		isError
-	} = useData('getPokemons', query, [searchValue]);
+	} = useData<IPokemons>('getPokemons', query, [searchValue]);
 
 	const handleSearhChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		console.log('####: e', e.target.value);
 		setSearchValue(e.target.value);
-		setQuery((s) => ({
-			...s,
+		setQuery((state: IQuery) => ({
+			...state,
 			name: e.target.value
 		}));
 	}
@@ -79,7 +87,7 @@ const PokedexPage = () => {
 		<>
 			<Layout className={s.root}>
 				<Heading hType='h3'>
-					{!isLoading && data?.total} <b>Pokemons</b> for you to choise favorite
+					{!isLoading && data && data.total} <b>Pokemons</b> for you to choise favorite
 				</Heading>
 				{/*
 				<div>
@@ -94,7 +102,7 @@ const PokedexPage = () => {
 					<div id={s.wrapper}>
 						<div id={s.content}>
 							{
-								!isLoading && data?.pokemons.map((pokemon) => {
+								!isLoading && data && data.pokemons.map((pokemon: PokemonsData) => {
 									return <PokemonCard
 										key={pokemon.name}
 										pokemon={pokemon}
