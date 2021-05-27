@@ -1,0 +1,26 @@
+@import "../../variables";
+
+.root {
+	background-color: $danger;
+}
+
+.wrap {
+	border: 1px solid red;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.text {
+	border: 1px solid green;
+	font-size: 72px; 
+}
+
+.subtitle {
+	border: 1px solid blue;
+	font-size: 32px;
+}
+
+.layer {
+	border: 1px solid red;
+}
