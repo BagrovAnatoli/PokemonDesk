@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PokemonCard from '../../components/PokemonCard';
 import Heading from '../../components/Heading';
 import Layout from '../../components/Layout';
 //import { pokemons } from './assets/pokemons';
 import useData from '../../hook/getData';
+import useDebounce from '../../hook/useDebounce';
 import req from "../../utils/request";
 
 import {IPokemons, PokemonsData} from '../../interface/pokemons'
@@ -11,50 +12,17 @@ import {IPokemons, PokemonsData} from '../../interface/pokemons'
 import s from './Pokedex.module.scss';
 
 
-
-
-// interface EmptyPageProps {
-// 	title?: string;
-// };
-//console.log('pokemons: ', pokemons);
-
-// interface IData {
-// 		total: number;
-// 		count: number;
-// 		offset: number;
-// 		limit: number;
-// 		pokemons: IPokemon[];
-// 	}
-
-// interface IPokemon {
-// 	"name_clean": string;
-//     "abilities": string[];
-//     "stats": {
-//       "hp": number;
-//       "attack": number;
-//       "defense": number;
-//       "special-attack": number;
-//       "special-defense": number;
-//       "speed": number;
-//     },
-//     "types": string[];
-//     "img": string;
-//     "name": string;
-//     "base_experience": number;
-//     "height": number;
-//     "id": number;
-//     "is_default": boolean;
-//     "order": number;
-//     "weight": number;
-// }
-
 interface IQuery {
 	name?: string;
+	limit: number;
 }
 
 const PokedexPage = () => {
 	const [searchValue, setSearchValue] = useState('');
-	const [query, setQuery] = useState<IQuery>({});
+	const [query, setQuery] = useState<IQuery>({
+		limit: 12
+	});
+	const debouncedValue = useDebounce(searchValue, 500);
 
 	// const query = useMemo(() => ({
 	// 	name: searchValue
@@ -63,7 +31,7 @@ const PokedexPage = () => {
 		data,
 		isLoading,
 		isError
-	} = useData<IPokemons>('getPokemons', query, [searchValue]);
+	} = useData<IPokemons>('getPokemons', query, [debouncedValue]);
 
 	const handleSearhChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		console.log('####: e', e.target.value);
