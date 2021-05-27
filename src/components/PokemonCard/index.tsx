@@ -1,6 +1,7 @@
 import React from 'react';
 import s from './PokemonCard.module.scss';
 import Heading from "../Heading";
+import {A} from 'hookrouter';
 
 interface PokemonCardProps {
     pokemon: {
@@ -29,8 +30,10 @@ interface PokemonCardProps {
 const toFirstUpperCase = (s: string): string => s[0].toUpperCase() + s.substr(1).toLowerCase();
 
 const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
-    //console.log('pokemon', pokemon);
     return (
+        <A
+            href={`/pokedex/${pokemon.id}`}
+        >
         <div className={s.root}>
             <div className={s.infoWrap}>
                 <Heading hType='h4' className={s.titleName}>
@@ -60,6 +63,7 @@ const PokemonCard: React.FC<PokemonCardProps> = ({ pokemon }) => {
                 <img src={pokemon.img} alt={toFirstUpperCase(pokemon.name)} />
             </div>
         </div>
+        </A>
     );
 };
 

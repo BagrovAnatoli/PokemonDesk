@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import req from "../utils/request";
 //import {IPokemons, IData} from '../interface/pokemons';
 
-const useData = <T>(endpoint: string, query: object, deps: any[] = []) => {
+const useData = <T>(endpoint: string, query: object | null, deps: any[] | null = [], addPath?: string | number) => {
 	const [data, setData] = useState<T | null>(null);
 	const [isLoading, setIsLoading] = useState<boolean>(true);
 	const [isError, setIsError] = useState<boolean>(false);

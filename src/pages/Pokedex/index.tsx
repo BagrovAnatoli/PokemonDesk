@@ -5,7 +5,7 @@ import Layout from '../../components/Layout';
 //import { pokemons } from './assets/pokemons';
 import useData from '../../hook/getData';
 import useDebounce from '../../hook/useDebounce';
-import req from "../../utils/request";
+//import req from "../../utils/request";
 
 import {IPokemons, PokemonsData} from '../../interface/pokemons'
 
@@ -70,12 +70,12 @@ const PokedexPage = () => {
 					<div id={s.wrapper}>
 						<div id={s.content}>
 							{
-								!isLoading && data && data.pokemons.map((pokemon: PokemonsData) => {
-									return <PokemonCard
+								!isLoading && data && data.pokemons.map((pokemon: PokemonsData) => (
+									<PokemonCard
 										key={pokemon.name}
 										pokemon={pokemon}
 									/>
-								})
+								))
 							}
 						</div>	
 					</div>

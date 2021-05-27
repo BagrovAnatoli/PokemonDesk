@@ -6,7 +6,7 @@ import s from './Header.module.scss';
 
 import {ReactComponent as PokemonLogoSvg} from './assets/Logo.svg';
 import Layout from '../Layout';
-import {GENERAL_MENU} from '../../routes';
+import routes, {GENERAL_MENU} from '../../routes';
 
 interface IMenu {
 	title: string;
